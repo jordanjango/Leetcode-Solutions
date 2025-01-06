@@ -25,6 +25,7 @@ taking the subsequence elements.
 #include <vector>
 using namespace std;
 
+//This is dp approach to cache the overlapping sub-prioblem subsequence.
 int generateMaxSumNonAdjacent(int index , vector<int>& nums , vector<int>& dp){
 
 //base case if it goes negative
@@ -41,23 +42,23 @@ return dp[index] = max(pick,notPick);
 
 }
 
-// Function to find the maximum sum of non-adjacent subsequences
-// void generateMaxSumNonAdjacent(int index, vector<int>& current, vector<int>& nums, int& maxSum) {
-//     // Calculate the current sum of the subsequence
-//     int currentSum = 0;
-//     for (int num : current) {
-//         currentSum += num;
-//     }
-//     // Update the maximum sum
-//     maxSum = max(maxSum, currentSum);
+//Function to find the maximum sum of non-adjacent subsequences (Brute Force)
+void generateMaxSumNonAdjacent(int index, vector<int>& current, vector<int>& nums, int& maxSum) {
+    // Calculate the current sum of the subsequence
+    int currentSum = 0;
+    for (int num : current) {
+        currentSum += num;
+    }
+    // Update the maximum sum
+    maxSum = max(maxSum, currentSum);
 
-//     // Iterate over all elements starting from the current index
-//     for (int i = index; i < nums.size(); i++) {
-//         current.push_back(nums[i]); // Pick the current element
-//         generateMaxSumNonAdjacent(i + 2, current, nums, maxSum); // Skip the adjacent element (move to i + 2)
-//         current.pop_back(); // Backtrack to remove the last element and explore other options
-//     }
-// }
+    // Iterate over all elements starting from the current index
+    for (int i = index; i < nums.size(); i++) {
+        current.push_back(nums[i]); // Pick the current element
+        generateMaxSumNonAdjacent(i + 2, current, nums, maxSum); // Skip the adjacent element (move to i + 2)
+        current.pop_back(); // Backtrack to remove the last element and explore other options
+    }
+}
 
 
 int main() {
